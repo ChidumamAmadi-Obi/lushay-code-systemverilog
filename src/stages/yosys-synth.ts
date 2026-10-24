@@ -41,8 +41,10 @@ function createYosysSynthStage(edition: YosysEditions) {
             const synthCommand = this.getSynthCommand();
             const synthesisCommand = [
                 yosysPath,
+                '-m',
+                'slang'
                 '-p',
-                `read_verilog ${this.projectFile.includedFilePaths.join(' ')}; ${synthCommand} -top ${this.projectFile.top || 'top'} -json ${outPath} ${options}`
+                `read_slang ${this.projectFile.includedFilePaths.join(' ')}; ${synthCommand} -top ${this.projectFile.top || 'top'} -json ${outPath} ${options}`
             ];
             this.filesCreated.push(outPath);
             return this.runCommand(synthesisCommand);
